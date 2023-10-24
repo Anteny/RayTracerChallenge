@@ -6,3 +6,8 @@ C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallenge\obj\De
 C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.csproj.CoreCompileInputs.cache
 C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.exe
 C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.pdb
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.csproj.AssemblyReference.cache
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.csproj.SuggestedBindingRedirects.cache
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.csproj.CoreCompileInputs.cache
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.exe
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.pdb

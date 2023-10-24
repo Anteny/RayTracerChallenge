@@ -20,3 +20,7 @@ C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallengeTests\o
 C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.csproj.CopyComplete
 C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.dll
 C:\Users\Anteny Erdman\source\repos\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.pdb
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.csproj.AssemblyReference.cache
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.csproj.CoreCompileInputs.cache
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.dll
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallengeTests\obj\Debug\RayTracerChallengeTests.pdb

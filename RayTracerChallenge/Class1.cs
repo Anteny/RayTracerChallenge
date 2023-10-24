@@ -35,6 +35,10 @@ namespace RayTracerChallenge
             {
                 return "point";
             }
+            else
+            {
+                return "Not Defined";
+            }
         }
 
         public static bool CompareTuple((float x, float y, float z, float w) TupleA,(float x, float y, float z, float w) TupleB)
@@ -57,6 +61,16 @@ namespace RayTracerChallenge
                 return false;
             }
             return true;
+        }
+
+        public static (float x, float y, float z, float w) AddTuples((float x, float y, float z, float w) TupleA, (float x, float y, float z, float w) TupleB)
+        {
+            (float x, float y, float z, float w) Sum;
+            Sum.x = TupleA.x + TupleB.x;
+            Sum.y = TupleA.y + TupleB.y;
+            Sum.z = TupleA.z + TupleB.z;
+            Sum.w = TupleA.w + TupleB.w;
+            return Sum;
         }
     }
 }

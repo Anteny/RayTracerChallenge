@@ -65,7 +65,7 @@ namespace RayTracerChallenge.Tests
             (float x, float y, float z, float w) tuple2 = ((float)-2, (float)3, (float)1, (float)0);
             (float x, float y, float z, float w) Expected = ((float)-2, (float)3, (float)1, (float)0);
 
-            (float x, float y, float z, float w)  Actual = AddTuples(tuple1, tuple2);
+            (float x, float y, float z, float w)  Actual = MainClass.AddTuples(tuple1, tuple2);
 
             Assert.AreEqual(Expected, Actual);
         }
