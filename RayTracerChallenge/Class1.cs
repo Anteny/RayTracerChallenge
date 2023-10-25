@@ -41,36 +41,87 @@ namespace RayTracerChallenge
             }
         }
 
-        public static bool CompareTuple((float x, float y, float z, float w) TupleA,(float x, float y, float z, float w) TupleB)
+        public static bool CompareTuple((float x, float y, float z, float w) Tuple1,(float x, float y, float z, float w) Tuple2)
         // Compares two tuples. If they are within .00001 on all elements returns true, otherwise returns false.
         {
-            if (Math.Abs(TupleA.x - TupleB.x) > 0.00001)
+            if (Math.Abs(Tuple1.x - Tuple2.x) > 0.00001)
             {
                 return false;
             }
-            else if (Math.Abs(TupleA.y - TupleB.y) > 0.00001)
+            else if (Math.Abs(Tuple1.y - Tuple2.y) > 0.00001)
             {
                 return false;
             }
-            else if (Math.Abs(TupleA.z - TupleB.z) > 0.00001)
+            else if (Math.Abs(Tuple1.z - Tuple2.z) > 0.00001)
             {
                 return false;
             }
-            else if (Math.Abs(TupleA.w - TupleB.w) > 0.00001)
+            else if (Math.Abs(Tuple1.w - Tuple2.w) > 0.00001)
             {
                 return false;
             }
             return true;
         }
 
-        public static (float x, float y, float z, float w) AddTuples((float x, float y, float z, float w) TupleA, (float x, float y, float z, float w) TupleB)
+        public static (float x, float y, float z, float w) AddTuples((float x, float y, float z, float w) Tuple1, (float x, float y, float z, float w) Tuple2)
         {
             (float x, float y, float z, float w) Sum;
-            Sum.x = TupleA.x + TupleB.x;
-            Sum.y = TupleA.y + TupleB.y;
-            Sum.z = TupleA.z + TupleB.z;
-            Sum.w = TupleA.w + TupleB.w;
+            Sum.x = Tuple1.x + Tuple2.x;
+            Sum.y = Tuple1.y + Tuple2.y;
+            Sum.z = Tuple1.z + Tuple2.z;
+            Sum.w = Tuple1.w + Tuple2.w;
             return Sum;
+        }
+
+        public static (float x, float y, float z, float w) SubtractTuples((float x, float y, float z, float w) Tuple1, (float x, float y, float z, float w) Tuple2)
+        {
+            (float x, float y, float z, float w) Sum;
+            Sum.x = Tuple1.x - Tuple2.x;
+            Sum.y = Tuple1.y - Tuple2.y;
+            Sum.z = Tuple1.z - Tuple2.z;
+            Sum.w = Tuple1.w - Tuple2.w;
+            return Sum;
+        }
+
+        public static (float x, float y, float z, float w) NegateTuple((float x, float y, float z, float w) Tuple)
+        {
+            (float x, float y, float z, float w) Sum;
+            Sum.x = 0 - Tuple.x;
+            Sum.y = 0 - Tuple.y;
+            Sum.z = 0 - Tuple.z;
+            Sum.w = 0 - Tuple.w;
+            return Sum;
+        }
+
+        public static (float x, float y, float z, float w) MultiplyTuple((float x, float y, float z, float w) Tuple, float scalar)
+        {
+            (float x, float y, float z, float w) Product;
+            Product.x = scalar * Tuple.x;
+            Product.y = scalar * Tuple.y;
+            Product.z = scalar * Tuple.z;
+            Product.w = scalar * Tuple.w;
+            return Product;
+        }
+
+        public static (float x, float y, float z, float w) DivideTuple((float x, float y, float z, float w) Tuple, float scalar)
+        {
+            (float x, float y, float z, float w) Product;
+            Product.x = Tuple.x / scalar;
+            Product.y = Tuple.y / scalar;
+            Product.z = Tuple.z / scalar;
+            Product.w = Tuple.w / scalar;
+            return Product;
+        }
+
+        public static float ComputeMagnitudeOfVector((float x, float y, float z, float w) Tuple)
+        {
+            return (float)Math.Sqrt((Tuple.x * Tuple.x) + (Tuple.y * Tuple.y) + (Tuple.z * Tuple.z) + (Tuple.w * Tuple.w));
+        }
+
+        public static (float x, float y, float z, float w) NormalizeTuple((float x, float y, float z, float w) Tuple)
+        {
+            float Magnitude = ComputeMagnitudeOfVector(Tuple);
+            return DivideTuple(Tuple, Magnitude);
         }
     }
 }

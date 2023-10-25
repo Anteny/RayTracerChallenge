@@ -11,3 +11,6 @@ C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge
 C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.csproj.CoreCompileInputs.cache
 C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.exe
 C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\obj\Debug\RayTracerChallenge.pdb
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\bin\Debug\RayTracerChallenge.exe.config
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\bin\Debug\RayTracerChallenge.exe
+C:\Users\Anteny Erdman\source\repos\Anteny\RayTracerChallenge\RayTracerChallenge\bin\Debug\RayTracerChallenge.pdb
