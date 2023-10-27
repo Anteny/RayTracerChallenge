@@ -123,5 +123,10 @@ namespace RayTracerChallenge
             float Magnitude = ComputeMagnitudeOfVector(Tuple);
             return DivideTuple(Tuple, Magnitude);
         }
+
+        public static float DotProductOfTwoTuples((float x, float y, float z, float w) Tuple1, (float x, float y, float z, float w) Tuple2)
+        {
+            return ((Tuple1.x * Tuple2.x) + (Tuple1.y * Tuple2.y) + (Tuple1.z * Tuple2.z) + (Tuple1.w * Tuple2.w));
+        }
     }
 }

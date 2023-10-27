@@ -167,7 +167,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void ComputeMagnitudeOfUnitVectorX()
+        public void ComputeMagnitudeOfUnitVectorX_Test()
         {
             (float x, float y, float z, float w) tuple = (1, 0, 0, 0);
             float Expected = 1;
@@ -178,7 +178,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void ComputeMagnitudeOfUnitVectorY()
+        public void ComputeMagnitudeOfUnitVectorY_Test()
         {
             (float x, float y, float z, float w) tuple = (0, 1, 0, 0);
             float Expected = 1;
@@ -189,7 +189,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void ComputeMagnitudeOfUnitVectorZ()
+        public void ComputeMagnitudeOfUnitVectorZ_Test()
         {
             (float x, float y, float z, float w) tuple = (0, 0, 1, 0);
             float Expected = 1;
@@ -200,7 +200,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void ComputeMagnitudeOfPositiveVector()
+        public void ComputeMagnitudeOfPositiveVector_Test()
         {
             (float x, float y, float z, float w) tuple = (1, 2, 3, 0);
             float Expected = (float)Math.Sqrt(14);
@@ -211,7 +211,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void ComputeMagnitudeOfNegativeVector()
+        public void ComputeMagnitudeOfNegativeVector_Test()
         {
             (float x, float y, float z, float w) tuple = (-1, -2, -3, 0);
             float Expected = (float)Math.Sqrt(14);
@@ -222,7 +222,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void NormalizeUnitVector()
+        public void NormalizeUnitVector_Test()
         {
             (float x, float y, float z, float w) tuple = (4, 0, 0, 0);
             (float x, float y, float z, float w) Expected = (1, 0, 0, 0);
@@ -233,7 +233,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void NormalizeVector()
+        public void NormalizeVector_Test()
         {
             (float x, float y, float z, float w) tuple = (1, 2, 3, 0);
             (float x, float y, float z, float w) Expected = ((float)(1 / Math.Sqrt(14)), (float)(2 / Math.Sqrt(14)), (float)(3 / Math.Sqrt(14)), 0);
@@ -241,6 +241,18 @@ namespace RayTracerChallenge.Tests
             (float x, float y, float z, float w) Actual = MainClass.NormalizeTuple(tuple);
 
             Assert.IsTrue(MainClass.CompareTuple(Expected, Actual));
+        }
+
+        [TestMethod]
+        public void DotProductOfTwoTuples_Test()
+        {
+            (float x, float y, float z, float w) tuple1 = (1, 2, 3, 0);
+            (float x, float y, float z, float w) tuple2 = (2, 3, 4, 0);
+            float Expected = 20;
+
+            float Actual = MainClass.DotProductOfTwoTuples(tuple1, tuple2);
+
+            Assert.AreEqual(Expected, Actual);
         }
     }
 }
