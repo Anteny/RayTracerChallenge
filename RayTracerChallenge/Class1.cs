@@ -8,6 +8,18 @@ namespace RayTracerChallenge
 {
     public class MainClass
     {
+        public struct Projectile
+        {
+            public (float x, float y, float z, float w) Position;
+            public (float x, float y, float z, float w) Velocity;
+        }
+
+        public struct Environment
+        {
+            public (float x, float y, float z, float w) Gravity;
+            public (float x, float y, float z, float w) Wind;
+        }
+
         static void Main(string[] args)
         {
         }
@@ -127,6 +139,24 @@ namespace RayTracerChallenge
         public static float DotProductOfTwoTuples((float x, float y, float z, float w) Tuple1, (float x, float y, float z, float w) Tuple2)
         {
             return ((Tuple1.x * Tuple2.x) + (Tuple1.y * Tuple2.y) + (Tuple1.z * Tuple2.z) + (Tuple1.w * Tuple2.w));
+        }
+
+        public static (float x, float y, float z, float w) CrossProductOfTwoTuples((float x, float y, float z, float w) Tuple1, (float x, float y, float z, float w) Tuple2)
+        {
+            (float x, float y, float z, float w) Product;
+            Product.x = ((Tuple1.y * Tuple2.z) - (Tuple1.z * Tuple2.y));
+            Product.y = ((Tuple1.z * Tuple2.x) - (Tuple1.x * Tuple2.z));
+            Product.z = ((Tuple1.x * Tuple2.y) - (Tuple1.y * Tuple2.x));
+            Product.w = 0;
+            return Product;
+        }
+
+        public static Projectile Tick(Environment Env, Projectile Proj) 
+        {
+            Projectile Sum = new Projectile();
+            Sum.Position = AddTuples(Proj.Position, Proj.Velocity);
+            Sum.Velocity = AddTuples(AddTuples(Proj.Velocity, Env.Gravity), Env.Wind);
+            return Sum;
         }
     }
 }

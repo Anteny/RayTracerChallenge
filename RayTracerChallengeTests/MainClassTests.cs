@@ -41,7 +41,7 @@ namespace RayTracerChallenge.Tests
             (float x, float y, float z) point = (4, -4, 3);
             float Expected = 1;
 
-            var NewPoint = MainClass.CreatePointTuple(point);
+            (float x, float y, float z, float w) NewPoint = MainClass.CreatePointTuple(point);
             float Actual = NewPoint.w;
 
             Assert.AreEqual(Expected, Actual);
@@ -53,7 +53,7 @@ namespace RayTracerChallenge.Tests
             (float x, float y, float z) vector = (4, -4, 3);
             float Expected = 0;
 
-            var NewVector = MainClass.CreateVectorTuple(vector);
+            (float x, float y, float z, float w) NewVector = MainClass.CreateVectorTuple(vector);
             float Actual = NewVector.w;
 
             Assert.AreEqual(Expected, Actual);
@@ -251,6 +251,30 @@ namespace RayTracerChallenge.Tests
             float Expected = 20;
 
             float Actual = MainClass.DotProductOfTwoTuples(tuple1, tuple2);
+
+            Assert.AreEqual(Expected, Actual);
+        }
+
+        [TestMethod]
+        public void CrossProductOfTwoTuplesAB_Test()
+        {
+            (float x, float y, float z, float w) tuple1 = (1, 2, 3, 0);
+            (float x, float y, float z, float w) tuple2 = (2, 3, 4, 0);
+            (float x, float y, float z, float w) Expected = (-1, 2, -1, 0);
+
+            (float x, float y, float z, float w) Actual = MainClass.CrossProductOfTwoTuples(tuple1, tuple2);
+
+            Assert.AreEqual(Expected, Actual);
+        }
+
+        [TestMethod]
+        public void CrossProductOfTwoTuplesBA_Test()
+        {
+            (float x, float y, float z, float w) tuple1 = (1, 2, 3, 0);
+            (float x, float y, float z, float w) tuple2 = (2, 3, 4, 0);
+            (float x, float y, float z, float w) Expected = (1, -2, 1, 0);
+
+            (float x, float y, float z, float w) Actual = MainClass.CrossProductOfTwoTuples(tuple1, tuple2);
 
             Assert.AreEqual(Expected, Actual);
         }
