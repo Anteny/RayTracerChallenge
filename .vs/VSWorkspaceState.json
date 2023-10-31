@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\RayTracerChallenge"
+    "\\RayTracerChallenge",
+    "\\RayTracerChallengeTests"
   ],
-  "SelectedNode": "\\RayTracerChallenge\\Class1.cs",
+  "SelectedNode": "\\RayTracerChallengeTests\\MainClassTests.cs",
   "PreviewInSolutionExplorer": false
 }
