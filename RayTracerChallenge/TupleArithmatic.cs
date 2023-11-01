@@ -42,7 +42,11 @@ namespace RayTracerChallenge
             Sum.x = 0 - Tuple.x;
             Sum.y = 0 - Tuple.y;
             Sum.z = 0 - Tuple.z;
-            Sum.w = Tuple.w;
+            Sum.w = 0 - Tuple.w;
+            if (Sum.w == -1)
+            {
+                throw new ArgumentException();
+            }
             return Sum;
         }
 
@@ -106,6 +110,56 @@ namespace RayTracerChallenge
             Product.z = ((Tuple1.x * Tuple2.y) - (Tuple1.y * Tuple2.x));
             Product.w = 0;
             return Product;
+        }
+
+        public static MainClass.Color CreateColor(float Red, float Green, float Blue)
+        {
+            MainClass.Color NewColor = new MainClass.Color(Red, Green, Blue);
+            return NewColor;
+        }
+
+        public static MainClass.Color AddColors(MainClass.Color Color1, MainClass.Color Color2)
+        {
+            MainClass.Color SumColor = new MainClass.Color
+            {
+                red = Color1.red + Color2.red,
+                blue = Color1.blue + Color2.blue,
+                green = Color1.green + Color2.green
+            };
+            return SumColor;
+        }
+
+        public static MainClass.Color SubtractColors(MainClass.Color Color1, MainClass.Color Color2)
+        {
+            MainClass.Color SumColor = new MainClass.Color
+            {
+                red = Color1.red - Color2.red,
+                blue = Color1.blue - Color2.blue,
+                green = Color1.green - Color2.green
+            };
+            return SumColor;
+        }
+
+        public static MainClass.Color MultiplyColorByScalar(MainClass.Color Color1, float Scalar)
+        {
+            MainClass.Color ProductColor = new MainClass.Color
+            {
+                red = Color1.red * Scalar,
+                blue = Color1.blue * Scalar,
+                green = Color1.green * Scalar
+            };
+            return ProductColor;
+        }
+
+        public static MainClass.Color MultiplyColors(MainClass.Color Color1, MainClass.Color Color2)
+        {
+            MainClass.Color ProductColor = new MainClass.Color
+            {
+                red = Color1.red * Color2.red,
+                blue = Color1.blue * Color2.blue,
+                green = Color1.green * Color2.green
+            };
+            return ProductColor;
         }
     }
 }

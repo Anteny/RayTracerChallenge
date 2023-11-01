@@ -48,6 +48,20 @@ namespace RayTracerChallenge
             }
         }
 
+        public struct Color
+        {
+            public float red;
+            public float green;
+            public float blue;
+
+            public Color(float Red, float Green, float Blue)
+            {
+                red = Red;
+                green = Green; 
+                blue = Blue;
+            }
+        }
+
         static void Main(string[] args)
         {
         }
@@ -117,7 +131,23 @@ namespace RayTracerChallenge
             return true;
         }
 
-        
+        public static bool CompareColor(MainClass.Color Color1, MainClass.Color Color2)
+        // Compares two tuples. If they are within .00001 on all elements returns true, otherwise returns false.
+        {
+            if (Math.Abs(Color1.red - Color2.red) > 0.00001)
+            {
+                return false;
+            }
+            else if (Math.Abs(Color1.green - Color2.green) > 0.00001)
+            {
+                return false;
+            }
+            else if (Math.Abs(Color1.blue - Color2.blue) > 0.00001)
+            {
+                return false;
+            }
+            return true;
+        }
 
         public static Projectile Tick(Environment Env, Projectile Proj) 
         {
