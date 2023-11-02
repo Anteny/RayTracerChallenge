@@ -86,5 +86,35 @@ namespace RayTracerChallenge.Tests
             Actual = WritePixel(Actual, 2, 3, Red);
             Assert.AreEqual(Actual.Size[2, 3], Red);
         }
+
+        [TestMethod]
+        public void CanvasToPPMLine123_Test()
+        {
+            string Expected = "P3\n5 3\n255";
+            MainClass.Canvas ToPass = new MainClass.Canvas(5, 3);
+            
+            string Actual = CanvasToPPM(ToPass);
+
+            Assert.IsTrue(Actual.Contains(Expected));
+        }
+
+        [TestMethod]
+        public void CanvasToPPMLine456_Test()
+        {
+            string Expected = "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \n";
+            Expected += "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0 \n";
+            Expected += "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 \n";
+            MainClass.Canvas ToPass = new MainClass.Canvas(5, 3);
+            MainClass.Color C1 = new Color((float)1.5, 0, 0);
+            MainClass.Color C2 = new Color(0, (float)0.5, 0);
+            MainClass.Color C3 = new Color((float)-0.5, 0, 1);
+            ToPass = WritePixel(ToPass, 0, 0, C1);
+            ToPass = WritePixel(ToPass, 2, 1, C2);
+            ToPass = WritePixel(ToPass, 4, 2, C3);
+
+            string Actual = CanvasToPPM(ToPass);
+
+            Assert.IsTrue(Actual.Contains(Expected));
+        }
     }
 }

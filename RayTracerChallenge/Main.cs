@@ -172,6 +172,58 @@ namespace RayTracerChallenge
             return canvas;
         }
 
+        public static string CanvasToPPM(Canvas canvas)
+        {
+            int width = canvas.Size.GetLength(0);
+            int height = canvas.Size.GetLength(1);
+            string ToPPM = "P3\n";
+            ToPPM += width;
+            ToPPM += " ";
+            ToPPM += height;
+            ToPPM += "\n255\n";
+            for (int i = 0; i < height; ++i)
+            {
+                for(int j = 0; j < width; ++j)
+                {
+                    int red = (int)(canvas.Size[j, i].red * 255 + 0.5);
+                    if (red < 0)
+                    {
+                        red = 0;
+                    }
+                    if (red > 255)
+                    {
+                        red = 255;
+                    }
+                    int blue = (int)(canvas.Size[j, i].blue * 255 + 0.5);
+                    if (blue < 0)
+                    {
+                        blue = 0;
+                    }
+                    if (blue > 255)
+                    {
+                        blue = 255;
+                    }
+                    int green = (int)(canvas.Size[j, i].green * 255 + 0.5);
+                    if (green < 0)
+                    {
+                        green = 0;
+                    }
+                    if (green > 255)
+                    {
+                        green = 255;
+                    }
+                    ToPPM += red;
+                    ToPPM += " ";
+                    ToPPM += green;
+                    ToPPM += " ";
+                    ToPPM += blue;
+                    ToPPM += " ";
+                }
+                ToPPM += "\n";
+            }
+            return ToPPM;
+        }
+
         public static Projectile Tick(Environment Env, Projectile Proj) 
         {
             Projectile Sum = new Projectile
@@ -181,6 +233,5 @@ namespace RayTracerChallenge
             };
             return Sum;
         }
-
     }
 }
