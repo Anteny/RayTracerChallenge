@@ -13,7 +13,7 @@ namespace RayTracerChallenge
             public Tuple Position;
             public Tuple Velocity;
 
-            public Projectile (Tuple position, Tuple velocity)
+            public Projectile(Tuple position, Tuple velocity)
             {
                 Position = position;
                 Velocity = velocity;
@@ -24,8 +24,8 @@ namespace RayTracerChallenge
         {
             public Tuple Gravity;
             public Tuple Wind;
-            
-            public Environment (Tuple gravity, Tuple wind)
+
+            public Environment(Tuple gravity, Tuple wind)
             {
                 Gravity = gravity;
                 Wind = wind;
@@ -57,8 +57,25 @@ namespace RayTracerChallenge
             public Color(float Red, float Green, float Blue)
             {
                 red = Red;
-                green = Green; 
+                green = Green;
                 blue = Blue;
+            }
+        }
+
+        public struct Canvas
+        {
+            public Color[,] Size;
+
+            public Canvas(int width, int height)
+            {
+                Size = new Color[width, height];
+                for (int i = 0; i < width; ++i)
+                {
+                    for (int j = 0; j < height; ++j)
+                    {
+                        Size[i, j] = new Color(0, 0, 0);
+                    }
+                }
             }
         }
 
@@ -149,6 +166,12 @@ namespace RayTracerChallenge
             return true;
         }
 
+        public static Canvas WritePixel(Canvas canvas, int width, int height, Color color)
+        {
+            canvas.Size[width, height] = color;
+            return canvas;
+        }
+
         public static Projectile Tick(Environment Env, Projectile Proj) 
         {
             Projectile Sum = new Projectile
@@ -158,5 +181,6 @@ namespace RayTracerChallenge
             };
             return Sum;
         }
+
     }
 }

@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static RayTracerChallenge.MainClass;
 
 namespace RayTracerChallenge.Tests
 {
@@ -57,6 +58,33 @@ namespace RayTracerChallenge.Tests
             float Actual = NewVector.w;
 
             Assert.AreEqual(Expected, Actual);
+        }
+
+        [TestMethod]
+        public void CreateCanvas_Test()
+        {
+            MainClass.Color Black = new MainClass.Color(0,0,0);
+
+            MainClass.Canvas Actual = new MainClass.Canvas(10, 20);
+
+            for (int i = 0; i < 10; ++i)
+            {
+                for (int j = 0; j < 20; ++j)
+                {
+                    MainClass.Color Temp = Actual.Size[i, j];
+                    Assert.AreEqual(Temp, Black);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void WritePixel_Test()
+        {
+            MainClass.Color Red = new MainClass.Color(1, 0, 0);
+
+            MainClass.Canvas Actual = new MainClass.Canvas(10, 20);
+            Actual = WritePixel(Actual, 2, 3, Red);
+            Assert.AreEqual(Actual.Size[2, 3], Red);
         }
     }
 }
