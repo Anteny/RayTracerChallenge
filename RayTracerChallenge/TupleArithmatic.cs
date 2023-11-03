@@ -112,12 +112,6 @@ namespace RayTracerChallenge
             return Product;
         }
 
-        public static MainClass.Color CreateColor(float Red, float Green, float Blue)
-        {
-            MainClass.Color NewColor = new MainClass.Color(Red, Green, Blue);
-            return NewColor;
-        }
-
         public static MainClass.Color AddColors(MainClass.Color Color1, MainClass.Color Color2)
         {
             MainClass.Color SumColor = new MainClass.Color

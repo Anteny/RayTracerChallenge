@@ -61,6 +61,19 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
+        public void CreateColor_Test()
+        {
+            float Red = (float)-0.5;
+            float Green = (float)0.4;
+            float Blue = (float)1.7;
+            MainClass.Color Expected = new MainClass.Color((float)-0.5, (float)0.4, (float)1.7);
+
+            MainClass.Color Actual = MainClass.CreateColor(Red, Green, Blue);
+
+            Assert.AreEqual(Expected, Actual);
+        }
+
+        [TestMethod]
         public void CreateCanvas_Test()
         {
             MainClass.Color Black = new MainClass.Color(0, 0, 0);

@@ -149,6 +149,12 @@ namespace RayTracerChallenge
             return true;
         }
 
+        public static MainClass.Color CreateColor(float Red, float Green, float Blue)
+        {
+            MainClass.Color NewColor = new MainClass.Color(Red, Green, Blue);
+            return NewColor;
+        }
+
         public static bool CompareColor(MainClass.Color Color1, MainClass.Color Color2)
         // Compares two tuples. If they are within .00001 on all elements returns true, otherwise returns false.
         {
