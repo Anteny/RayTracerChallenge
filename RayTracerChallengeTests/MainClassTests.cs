@@ -63,7 +63,7 @@ namespace RayTracerChallenge.Tests
         [TestMethod]
         public void CreateCanvas_Test()
         {
-            MainClass.Color Black = new MainClass.Color(0,0,0);
+            MainClass.Color Black = new MainClass.Color(0, 0, 0);
 
             MainClass.Canvas Actual = new MainClass.Canvas(10, 20);
 
@@ -92,7 +92,7 @@ namespace RayTracerChallenge.Tests
         {
             string Expected = "P3\n5 3\n255";
             MainClass.Canvas ToPass = new MainClass.Canvas(5, 3);
-            
+
             string Actual = CanvasToPPM(ToPass);
 
             Assert.IsTrue(Actual.Contains(Expected));
@@ -111,6 +111,28 @@ namespace RayTracerChallenge.Tests
             ToPass = WritePixel(ToPass, 0, 0, C1);
             ToPass = WritePixel(ToPass, 2, 1, C2);
             ToPass = WritePixel(ToPass, 4, 2, C3);
+
+            string Actual = CanvasToPPM(ToPass);
+
+            Assert.IsTrue(Actual.Contains(Expected));
+        }
+
+        [TestMethod]
+        public void CanvasToPPMToLong_Test()
+        {
+            string Expected = "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 \n";
+            Expected += "153 255 204 153 255 204 153 255 204 153 255 204 153 \n";
+            Expected += "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204 \n";
+            Expected += "153 255 204 153 255 204 153 255 204 153 255 204 153 \n";
+            MainClass.Canvas ToPass = new MainClass.Canvas(10, 2);
+            MainClass.Color C1 = new Color(1, (float)0.8, (float)0.6);
+            for(int i = 0; i < 10; ++i)
+            {
+                for(int j = 0; j < 2; ++j)
+                {
+                    ToPass = WritePixel(ToPass, i, j, C1);
+                }
+            }
 
             string Actual = CanvasToPPM(ToPass);
 

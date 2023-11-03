@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static RayTracerChallenge.MainClass;
 
 namespace RayTracerChallenge
 {
@@ -172,10 +173,25 @@ namespace RayTracerChallenge
             return canvas;
         }
 
+        public static int Clamp0255(float change)
+        {
+            int value = (int)(change * 255 + 0.5);
+            if (value < 0)
+            {
+                value = 0;
+            }
+            if (value > 255)
+            {
+                value = 255;
+            }
+            return value;
+        }
+
         public static string CanvasToPPM(Canvas canvas)
         {
             int width = canvas.Size.GetLength(0);
             int height = canvas.Size.GetLength(1);
+            int ColorCount = 0;
             string ToPPM = "P3\n";
             ToPPM += width;
             ToPPM += " ";
@@ -185,41 +201,31 @@ namespace RayTracerChallenge
             {
                 for(int j = 0; j < width; ++j)
                 {
-                    int red = (int)(canvas.Size[j, i].red * 255 + 0.5);
-                    if (red < 0)
-                    {
-                        red = 0;
-                    }
-                    if (red > 255)
-                    {
-                        red = 255;
-                    }
-                    int blue = (int)(canvas.Size[j, i].blue * 255 + 0.5);
-                    if (blue < 0)
-                    {
-                        blue = 0;
-                    }
-                    if (blue > 255)
-                    {
-                        blue = 255;
-                    }
-                    int green = (int)(canvas.Size[j, i].green * 255 + 0.5);
-                    if (green < 0)
-                    {
-                        green = 0;
-                    }
-                    if (green > 255)
-                    {
-                        green = 255;
-                    }
-                    ToPPM += red;
+
+                    ToPPM += Clamp0255(canvas.Size[j, i].red);
                     ToPPM += " ";
-                    ToPPM += green;
+                    ++ColorCount;
+                    if (ColorCount % 17 == 0)
+                    {
+                        ToPPM += "\n";
+                    }
+                    ToPPM += Clamp0255(canvas.Size[j, i].green);
                     ToPPM += " ";
-                    ToPPM += blue;
+                    ++ColorCount;
+                    if (ColorCount % 17 == 0)
+                    {
+                        ToPPM += "\n";
+                    }
+                    ToPPM += Clamp0255(canvas.Size[j, i].blue);
                     ToPPM += " ";
+                    ++ColorCount;
+                    if (ColorCount % 17 == 0 )
+                    {
+                        ToPPM += "\n";
+                    }
                 }
                 ToPPM += "\n";
+                ColorCount = 0;
             }
             return ToPPM;
         }
