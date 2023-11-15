@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,10 +83,34 @@ namespace RayTracerChallenge
 
         static void Main(string[] args)
         {
+            Tuple Start = CreatePointTuple((0, 1, 0));
+            Tuple Velocity = TupleArithmatic.MultiplyTuple(TupleArithmatic.NormalizeTuple(CreateVectorTuple((1, (float)1.8, 0))), (float)11.25);
+            Projectile p = new Projectile(Start, Velocity);
+
+            Tuple Gravity = CreateVectorTuple((0, (float)-0.1, 0));
+            Tuple Wind = CreateVectorTuple(((float)-0.01, 0, 0));
+            Environment e = new Environment(Gravity, Wind);
+
+            Canvas c = new Canvas(900, 550);
+            Color White = CreateColor(1, 1, 1);
+
+            while (p.Position.y > 0)
+            {
+                c = WritePixel(c, (int)p.Position.x, 550-(int)p.Position.y, White);
+                p = Tick(e, p);
+            }
+
+            string ToSave = CanvasToPPM(c);
+
+            using (StreamWriter OuputFile = new StreamWriter("Picture.txt"))
+            {
+                OuputFile.WriteLine(ToSave);
+            }
+
         }
 
-        public static Tuple CreateVectorTuple((float x, float y, float z) vector)
         // Returns the original vector with an additional element to identify it as a vector
+        public static Tuple CreateVectorTuple((float x, float y, float z) vector)
         {
             Tuple NewVector = new Tuple
             {
@@ -97,8 +122,8 @@ namespace RayTracerChallenge
             return NewVector;
         }
 
-        public static Tuple CreatePointTuple((float x, float y, float z) point)
         // Returns the original point with an additional element to identify it as a point
+        public static Tuple CreatePointTuple((float x, float y, float z) point)
         {
             Tuple NewPoint = new Tuple
             {
@@ -110,8 +135,8 @@ namespace RayTracerChallenge
             return NewPoint;
         }
 
-        public static string IdentifyTuple(Tuple ToIdentify)
         // When given a tuple will return a string stating what the tuple is.
+        public static string IdentifyTuple(Tuple ToIdentify)
         {
             if (ToIdentify.w == 0)
             {
@@ -127,8 +152,8 @@ namespace RayTracerChallenge
             }
         }
 
-        public static bool CompareTuple(Tuple Tuple1,Tuple Tuple2)
         // Compares two tuples. If they are within .00001 on all elements returns true, otherwise returns false.
+        public static bool CompareTuple(Tuple Tuple1,Tuple Tuple2)
         {
             if (Math.Abs(Tuple1.x - Tuple2.x) > 0.00001)
             {
@@ -149,14 +174,14 @@ namespace RayTracerChallenge
             return true;
         }
 
-        public static MainClass.Color CreateColor(float Red, float Green, float Blue)
+        public static Color CreateColor(float Red, float Green, float Blue)
         {
-            MainClass.Color NewColor = new MainClass.Color(Red, Green, Blue);
+            Color NewColor = new Color(Red, Green, Blue);
             return NewColor;
         }
 
-        public static bool CompareColor(MainClass.Color Color1, MainClass.Color Color2)
         // Compares two tuples. If they are within .00001 on all elements returns true, otherwise returns false.
+        public static bool CompareColor(Color Color1, Color Color2)
         {
             if (Math.Abs(Color1.red - Color2.red) > 0.00001)
             {
@@ -198,32 +223,25 @@ namespace RayTracerChallenge
             int width = canvas.Size.GetLength(0);
             int height = canvas.Size.GetLength(1);
             int ColorCount = 0;
-            string ToPPM = "P3\n";
-            ToPPM += width;
-            ToPPM += " ";
-            ToPPM += height;
-            ToPPM += "\n255\n";
+            string ToPPM = "P3\n" + width + " " + height + "\n255\n";
             for (int i = 0; i < height; ++i)
             {
                 for(int j = 0; j < width; ++j)
                 {
 
-                    ToPPM += Clamp0255(canvas.Size[j, i].red);
-                    ToPPM += " ";
+                    ToPPM += Clamp0255(canvas.Size[j, i].red) + " ";
                     ++ColorCount;
                     if (ColorCount % 17 == 0)
                     {
                         ToPPM += "\n";
                     }
-                    ToPPM += Clamp0255(canvas.Size[j, i].green);
-                    ToPPM += " ";
+                    ToPPM += Clamp0255(canvas.Size[j, i].green) + " ";
                     ++ColorCount;
                     if (ColorCount % 17 == 0)
                     {
                         ToPPM += "\n";
                     }
-                    ToPPM += Clamp0255(canvas.Size[j, i].blue);
-                    ToPPM += " ";
+                    ToPPM += Clamp0255(canvas.Size[j, i].blue) + " ";
                     ++ColorCount;
                     if (ColorCount % 17 == 0 )
                     {
