@@ -223,35 +223,36 @@ namespace RayTracerChallenge
             int width = canvas.Size.GetLength(0);
             int height = canvas.Size.GetLength(1);
             int ColorCount = 0;
-            string ToPPM = "P3\n" + width + " " + height + "\n255\n";
+            StringBuilder ToPPM = new StringBuilder();
+            ToPPM.Append("P3\n" + width + " " + height + "\n255\n");
             for (int i = 0; i < height; ++i)
             {
                 for(int j = 0; j < width; ++j)
                 {
 
-                    ToPPM += Clamp0255(canvas.Size[j, i].red) + " ";
+                    ToPPM.Append(Clamp0255(canvas.Size[j, i].red) + " ");
                     ++ColorCount;
                     if (ColorCount % 17 == 0)
                     {
-                        ToPPM += "\n";
+                        ToPPM.Append("\n");
                     }
-                    ToPPM += Clamp0255(canvas.Size[j, i].green) + " ";
+                    ToPPM.Append(Clamp0255(canvas.Size[j, i].green) + " ");
                     ++ColorCount;
                     if (ColorCount % 17 == 0)
                     {
-                        ToPPM += "\n";
+                        ToPPM.Append("\n");
                     }
-                    ToPPM += Clamp0255(canvas.Size[j, i].blue) + " ";
+                    ToPPM.Append(Clamp0255(canvas.Size[j, i].blue) + " ");
                     ++ColorCount;
                     if (ColorCount % 17 == 0 )
                     {
-                        ToPPM += "\n";
+                        ToPPM.Append("\n");
                     }
                 }
-                ToPPM += "\n";
+                ToPPM.Append("\n");
                 ColorCount = 0;
             }
-            return ToPPM;
+            return ToPPM.ToString();
         }
 
         public static Projectile Tick(Environment Env, Projectile Proj) 
