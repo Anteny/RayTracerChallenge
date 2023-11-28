@@ -10,6 +10,7 @@ namespace RayTracerChallenge
 {
     public class MainClass
     {
+        //Projectile stores information about a single pixel.
         public struct Projectile
         {
             public Tuple Position;
@@ -22,6 +23,7 @@ namespace RayTracerChallenge
             }
         }
 
+        //Environment stores information that is applicable to all projectiles.
         public struct Environment
         {
             public Tuple Gravity;
@@ -34,6 +36,7 @@ namespace RayTracerChallenge
             }
         }
 
+        //Tuples are either vectors or points.
         public struct Tuple
         {
             public float x;
@@ -50,6 +53,7 @@ namespace RayTracerChallenge
             }
         }
 
+        //Stores color information between 0 and 1.
         public struct Color
         {
             public float red;
@@ -64,6 +68,7 @@ namespace RayTracerChallenge
             }
         }
 
+        //2 dimension array of colors. inilialized as all black.
         public struct Canvas
         {
             public Color[,] Size;
@@ -81,6 +86,7 @@ namespace RayTracerChallenge
             }
         }
 
+        //current task creates a projectile and updates the canvas along its path.
         static void Main(string[] args)
         {
             Tuple Start = CreatePointTuple((0, 1, 0));
@@ -174,6 +180,7 @@ namespace RayTracerChallenge
             return true;
         }
 
+        //initializes a color.
         public static Color CreateColor(float Red, float Green, float Blue)
         {
             Color NewColor = new Color(Red, Green, Blue);
@@ -198,12 +205,14 @@ namespace RayTracerChallenge
             return true;
         }
 
+        //updates the color at a specified location.
         public static Canvas WritePixel(Canvas canvas, int width, int height, Color color)
         {
             canvas.Size[width, height] = color;
             return canvas;
         }
 
+        //takes a number and multiplies it by 255, then keeps the number between 0 and 255.
         public static int Clamp0255(float change)
         {
             int value = (int)(change * 255 + 0.5);
@@ -218,6 +227,7 @@ namespace RayTracerChallenge
             return value;
         }
 
+        //changes the canvas to a single string.
         public static string CanvasToPPM(Canvas canvas)
         {
             int width = canvas.Size.GetLength(0);
@@ -254,7 +264,8 @@ namespace RayTracerChallenge
             }
             return ToPPM.ToString();
         }
-
+        
+        //Takes a pixel and updates its location based on the motion acting on it.
         public static Projectile Tick(Environment Env, Projectile Proj) 
         {
             Projectile Sum = new Projectile
