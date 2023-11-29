@@ -86,6 +86,66 @@ namespace RayTracerChallenge
             }
         }
 
+        //Used to create a 4x4 matrix
+        public struct FBFMatrix
+        {
+            public float[,] Data;
+
+            public FBFMatrix(float[] ToAssign)
+            {
+                Data = new float[4, 4];
+                int Count = 0;
+                for (int i = 0; i < 4; ++i)
+                {
+                    for (int j = 0; j < 4; ++j)
+                    {
+                        Data[i, j] = ToAssign[Count];
+                        ++Count;
+                    }
+                }
+            }
+        }
+
+        //Used to create a 3x3 matrix
+        public struct THBTHMatrix
+        {
+            public float[,] Data;
+
+            public THBTHMatrix(float[] ToAssign)
+            {
+                Data = new float[3, 3];
+                int Count = 0;
+                for (int i = 0; i < 3; ++i)
+                {
+                    for (int j = 0; j < 3; ++j)
+                    {
+                        Data[i, j] = ToAssign[Count];
+                        ++Count;
+                    }
+                }
+            }
+        }
+
+        //Used to create a 2x2 matrix
+        public struct TWBTWMatrix
+        {
+            public float[,] Data;
+
+            public TWBTWMatrix(float[] ToAssign)
+            {
+                Data = new float[2, 2];
+                int Count = 0;
+                for (int i = 0; i < 2; ++i)
+                {
+                    for (int j = 0; j < 2; ++j)
+                    {
+                        Data[i, j] = ToAssign[Count];
+                        ++Count;
+                    }
+                }
+            }
+        }
+
         //current task creates a projectile and updates the canvas along its path.
         static void Main(string[] args)
         {

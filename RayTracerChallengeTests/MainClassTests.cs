@@ -151,5 +151,46 @@ namespace RayTracerChallenge.Tests
 
             Assert.IsTrue(Actual.Contains(Expected));
         }
+
+        [TestMethod]
+        public void CreateFBFMatrix()
+        {
+            float[] ToAssign = { 1, 2, 3, 4, (float)5.5, (float)6.5, (float)7.5, (float)8.5, 9, 10, 11, 12, (float)13.5, (float)14.5, (float)15.5, (float)16.5 };
+
+            MainClass.FBFMatrix Actual = new MainClass.FBFMatrix(ToAssign);
+
+            Assert.AreEqual(Actual.Data[0, 0], 1);
+            Assert.AreEqual(Actual.Data[0, 3], 4);
+            Assert.AreEqual(Actual.Data[1, 0], (float)5.5);
+            Assert.AreEqual(Actual.Data[1, 2], (float)7.5);
+            Assert.AreEqual(Actual.Data[2, 2], 11);
+            Assert.AreEqual(Actual.Data[3, 0], (float)13.5);
+            Assert.AreEqual(Actual.Data[3, 2], (float)15.5);
+        }
+
+        [TestMethod]
+        public void CreateTHBTHMatrix()
+        {
+            float[] ToAssign = { -3, 5, 0, 1, -2, -7, 0, 1, 1 };
+
+            MainClass.THBTHMatrix Actual = new MainClass.THBTHMatrix(ToAssign);
+
+            Assert.AreEqual(Actual.Data[0, 0], -3);
+            Assert.AreEqual(Actual.Data[1, 1], -2);
+            Assert.AreEqual(Actual.Data[2, 2], 1);
+        }
+
+        [TestMethod]
+        public void CreateTWBTWMatrix()
+        {
+            float[] ToAssign = { -3, 5, 1, -2 };
+
+            MainClass.TWBTWMatrix Actual = new MainClass.TWBTWMatrix(ToAssign);
+
+            Assert.AreEqual(Actual.Data[0, 0], -3);
+            Assert.AreEqual(Actual.Data[0, 1], 5);
+            Assert.AreEqual(Actual.Data[1, 0], 1);
+            Assert.AreEqual(Actual.Data[1, 1], -2);
+        }
     }
 }
