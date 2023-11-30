@@ -86,58 +86,23 @@ namespace RayTracerChallenge
             }
         }
 
-        //Used to create a 4x4 matrix
-        public struct FBFMatrix
+        //Used to create a matrix of a given size using an array of floats
+        public struct Matrix
         {
             public float[,] Data;
 
-            public FBFMatrix(float[] ToAssign)
+            public Matrix(int Rows, int Columns, float[] ToAssign)
             {
-                Data = new float[4, 4];
-                int Count = 0;
-                for (int i = 0; i < 4; ++i)
+                if(Rows * Columns != ToAssign.Length)
                 {
-                    for (int j = 0; j < 4; ++j)
-                    {
-                        Data[i, j] = ToAssign[Count];
-                        ++Count;
-                    }
+                    throw new ArgumentException();
                 }
-            }
-        }
 
-        //Used to create a 3x3 matrix
-        public struct THBTHMatrix
-        {
-            public float[,] Data;
-
-            public THBTHMatrix(float[] ToAssign)
-            {
-                Data = new float[3, 3];
+                Data = new float[Rows, Columns];
                 int Count = 0;
-                for (int i = 0; i < 3; ++i)
+                for (int i = 0; i < Rows; ++i)
                 {
-                    for (int j = 0; j < 3; ++j)
-                    {
-                        Data[i, j] = ToAssign[Count];
-                        ++Count;
-                    }
-                }
-            }
-        }
-
-        //Used to create a 2x2 matrix
-        public struct TWBTWMatrix
-        {
-            public float[,] Data;
-
-            public TWBTWMatrix(float[] ToAssign)
-            {
-                Data = new float[2, 2];
-                int Count = 0;
-                for (int i = 0; i < 2; ++i)
-                {
-                    for (int j = 0; j < 2; ++j)
+                    for (int j = 0; j < Columns; ++j)
                     {
                         Data[i, j] = ToAssign[Count];
                         ++Count;
@@ -334,6 +299,30 @@ namespace RayTracerChallenge
                 Velocity = TupleArithmatic.AddTuples(TupleArithmatic.AddTuples(Proj.Velocity, Env.Gravity), Env.Wind)
             };
             return Sum;
+        }
+
+        public static bool CompareMatrix(Matrix Matrix1, Matrix Matrix2)
+        {
+            if (Matrix1.Data.GetLength(0) != Matrix2.Data.GetLength(0))
+            {
+                return false;
+            }
+            if (Matrix1.Data.GetLength(1) != Matrix2.Data.GetLength(1))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < Matrix1.Data.GetLength(0); ++i)
+            {
+                for (int j = 0; j < Matrix1.Data.GetLength(1);  ++j)
+                {
+                    if (Matrix1.Data[i,j] - Matrix2.Data[i,j] > 0.00001)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

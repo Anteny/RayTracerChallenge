@@ -156,41 +156,80 @@ namespace RayTracerChallenge.Tests
         public void CreateFBFMatrix()
         {
             float[] ToAssign = { 1, 2, 3, 4, (float)5.5, (float)6.5, (float)7.5, (float)8.5, 9, 10, 11, 12, (float)13.5, (float)14.5, (float)15.5, (float)16.5 };
+            float Expected00 = 1;
+            float Expected03 = 4;
+            float Expected10 = (float)5.5;
+            float Expected12 = (float)7.5;
+            float Expected22 = 11;
+            float Expected30 = (float)13.5;
+            float Expected32 = (float)15.5;
 
-            MainClass.FBFMatrix Actual = new MainClass.FBFMatrix(ToAssign);
+            MainClass.Matrix Actual = new MainClass.Matrix(4, 4, ToAssign);
 
-            Assert.AreEqual(Actual.Data[0, 0], 1);
-            Assert.AreEqual(Actual.Data[0, 3], 4);
-            Assert.AreEqual(Actual.Data[1, 0], (float)5.5);
-            Assert.AreEqual(Actual.Data[1, 2], (float)7.5);
-            Assert.AreEqual(Actual.Data[2, 2], 11);
-            Assert.AreEqual(Actual.Data[3, 0], (float)13.5);
-            Assert.AreEqual(Actual.Data[3, 2], (float)15.5);
+            Assert.AreEqual(Actual.Data[0, 0], Expected00);
+            Assert.AreEqual(Actual.Data[0, 3], Expected03);
+            Assert.AreEqual(Actual.Data[1, 0], Expected10);
+            Assert.AreEqual(Actual.Data[1, 2], Expected12);
+            Assert.AreEqual(Actual.Data[2, 2], Expected22);
+            Assert.AreEqual(Actual.Data[3, 0], Expected30);
+            Assert.AreEqual(Actual.Data[3, 2], Expected32);
         }
 
         [TestMethod]
         public void CreateTHBTHMatrix()
         {
             float[] ToAssign = { -3, 5, 0, 1, -2, -7, 0, 1, 1 };
+            float Expected00 = -3;
+            float Expected11 = -2;
+            float Expected22 = 1;
 
-            MainClass.THBTHMatrix Actual = new MainClass.THBTHMatrix(ToAssign);
+            MainClass.Matrix Actual = new MainClass.Matrix(3, 3, ToAssign);
 
-            Assert.AreEqual(Actual.Data[0, 0], -3);
-            Assert.AreEqual(Actual.Data[1, 1], -2);
-            Assert.AreEqual(Actual.Data[2, 2], 1);
+            Assert.AreEqual(Actual.Data[0, 0], Expected00);
+            Assert.AreEqual(Actual.Data[1, 1], Expected11);
+            Assert.AreEqual(Actual.Data[2, 2], Expected22);
         }
 
         [TestMethod]
         public void CreateTWBTWMatrix()
         {
             float[] ToAssign = { -3, 5, 1, -2 };
+            float Expected00 = -3;
+            float Expected01 = 5;
+            float Expected10 = 1;
+            float Expected11 = -2;
 
-            MainClass.TWBTWMatrix Actual = new MainClass.TWBTWMatrix(ToAssign);
+            MainClass.Matrix Actual = new MainClass.Matrix(2, 2, ToAssign);
 
-            Assert.AreEqual(Actual.Data[0, 0], -3);
-            Assert.AreEqual(Actual.Data[0, 1], 5);
-            Assert.AreEqual(Actual.Data[1, 0], 1);
-            Assert.AreEqual(Actual.Data[1, 1], -2);
+            Assert.AreEqual(Actual.Data[0, 0], Expected00);
+            Assert.AreEqual(Actual.Data[0, 1], Expected01);
+            Assert.AreEqual(Actual.Data[1, 0], Expected10);
+            Assert.AreEqual(Actual.Data[1, 1], Expected11);
+        }
+
+        [TestMethod]
+        public void CompareSameMatrices()
+        {
+            float[] ToAssign = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2 };
+            MainClass.Matrix ToCompareA = new MainClass.Matrix(4, 4, ToAssign);
+            MainClass.Matrix ToCompareB = new MainClass.Matrix(4, 4, ToAssign);
+
+            bool Actual = CompareMatrix(ToCompareA, ToCompareB);
+
+            Assert.IsTrue(Actual);
+        }
+
+        [TestMethod]
+        public void CompareDifferentMatrices()
+        {
+            float[] Assign1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2 };
+            float[] Assign2 = { 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            MainClass.Matrix ToCompareA = new MainClass.Matrix(4, 4, Assign1);
+            MainClass.Matrix ToCompareB = new MainClass.Matrix(4, 4, Assign2);
+
+            bool Actual = CompareMatrix(ToCompareA, ToCompareB);
+
+            Assert.IsFalse(Actual);
         }
     }
 }
