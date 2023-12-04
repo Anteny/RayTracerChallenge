@@ -317,7 +317,7 @@ namespace RayTracerChallenge.Tests
 
             MainClass.Matrix Actual = TupleArithmatic.MultiplyMatrices(Expected, IdentityMatrix);
 
-            Assert.IsTrue(MainClass.CompareTuple(Expected, Actual));
+            Assert.IsTrue(MainClass.CompareMatrix(Expected, Actual));
         }
     }
 }
