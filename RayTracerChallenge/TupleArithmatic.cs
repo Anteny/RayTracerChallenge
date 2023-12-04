@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static RayTracerChallenge.MainClass;
 
 namespace RayTracerChallenge
 {
@@ -167,6 +168,51 @@ namespace RayTracerChallenge
                 green = Color1.green * Color2.green
             };
             return ProductColor;
+        }
+
+        //Multiplies two matrices together and returns the resulting matrix. Only works on same sized square matrices
+        public static MainClass.Matrix MultiplyMatrices(MainClass.Matrix Matrix1, MainClass.Matrix Matrix2)
+        {
+            int length;
+            int shared;
+            if (Matrix1.Data.GetLength(0) != Matrix2.Data.GetLength(1))
+            {
+                throw new ArgumentException();
+            }
+            shared = Matrix1.Data.GetLength(0);
+            MainClass.Matrix Result = new MainClass.Matrix();
+            Result.Data = new float[shared, shared];
+            for (int i = 0; i < shared; ++i)
+            {
+                for (int j = 0; j < shared; ++j)
+                {
+                    for (length = 0; length < shared; ++length)
+                    {
+                        Result.Data[i, j] += Matrix1.Data[i, length] * Matrix2.Data[length, j];
+                    }
+                }
+            }
+            return Result;
+        }
+
+        //Multiplies 4x4 matrix and a tuple, returning a new tuple.
+        public static MainClass.Tuple MultiplyMatrixByTuple(MainClass.Matrix MatrixToMultiply, MainClass.Tuple TupleToMultiply)
+        {
+            MainClass.Tuple Product = new MainClass.Tuple();
+
+            Product.x = MatrixToMultiply.Data[0, 0] * TupleToMultiply.x + MatrixToMultiply.Data[0, 1] * TupleToMultiply.y + 
+                MatrixToMultiply.Data[0, 2] * TupleToMultiply.z + MatrixToMultiply.Data[0, 3] * TupleToMultiply.w;
+
+            Product.y = MatrixToMultiply.Data[1, 0] * TupleToMultiply.x + MatrixToMultiply.Data[1, 1] * TupleToMultiply.y + 
+                MatrixToMultiply.Data[1, 2] * TupleToMultiply.z + MatrixToMultiply.Data[1, 3] * TupleToMultiply.w;
+
+            Product.z = MatrixToMultiply.Data[2, 0] * TupleToMultiply.x + MatrixToMultiply.Data[2, 1] * TupleToMultiply.y + 
+                MatrixToMultiply.Data[2, 2] * TupleToMultiply.z + MatrixToMultiply.Data[2, 3] * TupleToMultiply.w;
+
+            Product.w = MatrixToMultiply.Data[3, 0] * TupleToMultiply.x + MatrixToMultiply.Data[3, 1] * TupleToMultiply.y + 
+                MatrixToMultiply.Data[3, 2] * TupleToMultiply.z + MatrixToMultiply.Data[3, 3] * TupleToMultiply.w;
+
+            return Product;
         }
     }
 }

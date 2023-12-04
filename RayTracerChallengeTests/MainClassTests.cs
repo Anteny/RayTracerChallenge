@@ -153,7 +153,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void CreateFBFMatrix()
+        public void CreateFBFMatrix_Test()
         {
             float[] ToAssign = { 1, 2, 3, 4, (float)5.5, (float)6.5, (float)7.5, (float)8.5, 9, 10, 11, 12, (float)13.5, (float)14.5, (float)15.5, (float)16.5 };
             float Expected00 = 1;
@@ -176,7 +176,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void CreateTHBTHMatrix()
+        public void CreateTHBTHMatrix_Test()
         {
             float[] ToAssign = { -3, 5, 0, 1, -2, -7, 0, 1, 1 };
             float Expected00 = -3;
@@ -191,7 +191,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void CreateTWBTWMatrix()
+        public void CreateTWBTWMatrix_Test()
         {
             float[] ToAssign = { -3, 5, 1, -2 };
             float Expected00 = -3;
@@ -208,7 +208,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void CompareSameMatrices()
+        public void CompareSameMatrices_Test()
         {
             float[] ToAssign = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2 };
             MainClass.Matrix ToCompareA = new MainClass.Matrix(4, 4, ToAssign);
@@ -220,7 +220,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void CompareDifferentMatrices()
+        public void CompareDifferentMatrices_Test()
         {
             float[] Assign1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2 };
             float[] Assign2 = { 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
