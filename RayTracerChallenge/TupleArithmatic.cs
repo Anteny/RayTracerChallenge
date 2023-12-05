@@ -214,5 +214,20 @@ namespace RayTracerChallenge
 
             return Product;
         }
+
+        //Returns the transposed version of the given squared matrix
+        public static MainClass.Matrix TransposeMatrix(MainClass.Matrix ToTranspose)
+        {
+            MainClass.Matrix Result = new MainClass.Matrix();
+            Result.Data = new float[ToTranspose.Data.GetLength(1), ToTranspose.Data.GetLength(0)];
+            for (int i = 0; i < ToTranspose.Data.GetLength(0); ++i)
+            {
+                for (int j = 0; j < ToTranspose.Data.GetLength(1); ++j)
+                {
+                    Result.Data[j,i] = ToTranspose.Data[i,j];
+                }
+            }
+            return Result;
+        }
     }
 }

@@ -308,7 +308,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void MultiplyMatrixByIdentity()
+        public void MultiplyMatrixByIdentity_Test()
         {
             float[] MatrixData = { 0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32 };
             float[] IdentityMatrixData = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
@@ -318,6 +318,30 @@ namespace RayTracerChallenge.Tests
             MainClass.Matrix Actual = TupleArithmatic.MultiplyMatrices(Expected, IdentityMatrix);
 
             Assert.IsTrue(MainClass.CompareMatrix(Expected, Actual));
+        }
+
+        [TestMethod]
+        public void TransposeMatrix_Test()
+        {
+            float[] MatrixData = { 0, 9, 3, 0, 9, 8, 0, 8, 1, 8, 5, 3, 0, 0, 5, 8 };
+            float[] ExpectedData = { 0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8 };
+            MainClass.Matrix Expected = new MainClass.Matrix(4, 4, ExpectedData);
+            MainClass.Matrix ToTranspose = new MainClass.Matrix(4, 4, MatrixData);
+
+            MainClass.Matrix Actual = TupleArithmatic.TransposeMatrix(ToTranspose);
+
+            Assert.IsTrue(MainClass.CompareMatrix(Expected, Actual));
+        }
+
+        [TestMethod]
+        public void TransposeIdentity_Test()
+        {
+            float[] IdentityMatrixData = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+            MainClass.Matrix IdentityMatrix = new MainClass.Matrix(4, 4, IdentityMatrixData);
+
+            MainClass.Matrix Actual = TupleArithmatic.TransposeMatrix(IdentityMatrix);
+
+            Assert.IsTrue(MainClass.CompareMatrix(IdentityMatrix, Actual));
         }
     }
 }
