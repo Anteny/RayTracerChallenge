@@ -343,5 +343,17 @@ namespace RayTracerChallenge.Tests
 
             Assert.IsTrue(MainClass.CompareMatrix(IdentityMatrix, Actual));
         }
+
+        [TestMethod]
+        public void FindDeterminant_Test()
+        {
+            float[] DeterminantData = { 1, 5, -3, 2 };
+            MainClass.Matrix DeterminantMatrix = new MainClass.Matrix(2, 2, DeterminantData);
+            float Expected = 17;
+
+            float Actual = TupleArithmatic.FindDeterminant(DeterminantMatrix);
+
+            Assert.AreEqual(Expected, Actual);
+        }
     }
 }

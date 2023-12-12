@@ -229,5 +229,11 @@ namespace RayTracerChallenge
             }
             return Result;
         }
+
+        //Returns the determinant of a 2x2 matrix
+        public static float FindDeterminant(MainClass.Matrix Matrix)
+        {
+            return (float)(Matrix.Data[0, 0] * Matrix.Data[1, 1] - Matrix.Data[0, 1] * Matrix.Data[1, 0]);
+        }
     }
 }

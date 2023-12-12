@@ -96,7 +96,7 @@ namespace RayTracerChallenge.Tests
             MainClass.Color Red = new MainClass.Color(1, 0, 0);
 
             MainClass.Canvas Actual = new MainClass.Canvas(10, 20);
-            Actual = WritePixel(Actual, 2, 3, Red);
+            Actual = MainClass.WritePixel(Actual, 2, 3, Red);
             Assert.AreEqual(Actual.Size[2, 3], Red);
         }
 
@@ -106,7 +106,7 @@ namespace RayTracerChallenge.Tests
             string Expected = "P3\n5 3\n255";
             MainClass.Canvas ToPass = new MainClass.Canvas(5, 3);
 
-            string Actual = CanvasToPPM(ToPass);
+            string Actual = MainClass.CanvasToPPM(ToPass);
 
             Assert.IsTrue(Actual.Contains(Expected));
         }
@@ -121,11 +121,11 @@ namespace RayTracerChallenge.Tests
             MainClass.Color C1 = new Color((float)1.5, 0, 0);
             MainClass.Color C2 = new Color(0, (float)0.5, 0);
             MainClass.Color C3 = new Color((float)-0.5, 0, 1);
-            ToPass = WritePixel(ToPass, 0, 0, C1);
-            ToPass = WritePixel(ToPass, 2, 1, C2);
-            ToPass = WritePixel(ToPass, 4, 2, C3);
+            ToPass = MainClass.WritePixel(ToPass, 0, 0, C1);
+            ToPass = MainClass.WritePixel(ToPass, 2, 1, C2);
+            ToPass = MainClass.WritePixel(ToPass, 4, 2, C3);
 
-            string Actual = CanvasToPPM(ToPass);
+            string Actual = MainClass.CanvasToPPM(ToPass);
 
             Assert.IsTrue(Actual.Contains(Expected));
         }
@@ -143,11 +143,11 @@ namespace RayTracerChallenge.Tests
             {
                 for(int j = 0; j < 2; ++j)
                 {
-                    ToPass = WritePixel(ToPass, i, j, C1);
+                    ToPass = MainClass.WritePixel(ToPass, i, j, C1);
                 }
             }
 
-            string Actual = CanvasToPPM(ToPass);
+            string Actual = MainClass.CanvasToPPM(ToPass);
 
             Assert.IsTrue(Actual.Contains(Expected));
         }
@@ -214,7 +214,7 @@ namespace RayTracerChallenge.Tests
             MainClass.Matrix ToCompareA = new MainClass.Matrix(4, 4, ToAssign);
             MainClass.Matrix ToCompareB = new MainClass.Matrix(4, 4, ToAssign);
 
-            bool Actual = CompareMatrix(ToCompareA, ToCompareB);
+            bool Actual = MainClass.CompareMatrix(ToCompareA, ToCompareB);
 
             Assert.IsTrue(Actual);
         }
@@ -227,9 +227,68 @@ namespace RayTracerChallenge.Tests
             MainClass.Matrix ToCompareA = new MainClass.Matrix(4, 4, Assign1);
             MainClass.Matrix ToCompareB = new MainClass.Matrix(4, 4, Assign2);
 
-            bool Actual = CompareMatrix(ToCompareA, ToCompareB);
+            bool Actual = MainClass.CompareMatrix(ToCompareA, ToCompareB);
 
             Assert.IsFalse(Actual);
+        }
+
+        [TestMethod]
+        public void GetSmallSubmatrix_Test()
+        {
+            float[] FullMatrixData = { 1, 5, 0, -3, 2, 7, 0, 6, -3 };
+            float[] SubMatrixData = { -3, 2, 0, 6 };
+            MainClass.Matrix FullMatrix = new MainClass.Matrix(3, 3, FullMatrixData);
+            MainClass.Matrix Expected = new MainClass.Matrix(2, 2, SubMatrixData);
+
+            MainClass.Matrix Actual = MainClass.GetSubmatrix(FullMatrix, 0, 2);
+
+            Assert.IsTrue(MainClass.CompareMatrix(Actual, Expected));
+        }
+
+        [TestMethod]
+        public void GetLargeSubmatrix_Test()
+        {
+            float[] FullMatrixData = { -6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1 };
+            float[] SubMatrixData = { -6, 1, 6, -8, 8, 6, -7, -1, 1 };
+            MainClass.Matrix FullMatrix = new MainClass.Matrix(4, 4, FullMatrixData);
+            MainClass.Matrix Expected = new MainClass.Matrix(3, 3, SubMatrixData);
+
+            MainClass.Matrix Actual = MainClass.GetSubmatrix(FullMatrix, 2, 1);
+
+            Assert.IsTrue(MainClass.CompareMatrix(Actual, Expected));
+        }
+
+        [TestMethod]
+        public void FindMinor_Test()
+        {
+            float[] FullMatrixData = { 3, 5, 0, 2, -1, -7, 6, -1, 5 };
+            MainClass.Matrix FullMatrix = new MainClass.Matrix(3, 3, FullMatrixData);
+            float Expected = 25;
+
+            float Actual = MainClass.FindMinor(FullMatrix, 1, 0);
+
+            Assert.AreEqual(Expected, Actual);
+        }
+
+        [TestMethod]
+        public void FindCofactor()
+        {
+            float[] FullMatrixData = { 3, 5, 0, 2, -1, -7, 6, -1, 5 };
+            MainClass.Matrix FullMatrix = new MainClass.Matrix(3, 3, FullMatrixData);
+            float Expected1 = -12;
+            float Expected2 = -12;
+            float Expected3 = 25;
+            float Expected4 = -25;
+
+            float Actual1 = MainClass.FindMinor(FullMatrix, 0, 0);
+            float Actual2 = MainClass.FindCofactor(FullMatrix, 0, 0);
+            float Actual3 = MainClass.FindMinor(FullMatrix, 1, 0);
+            float Actual4 = MainClass.FindCofactor(FullMatrix, 1, 0);
+
+            Assert.AreEqual(Expected1, Actual1);
+            Assert.AreEqual(Expected2, Actual2);
+            Assert.AreEqual(Expected3, Actual3);
+            Assert.AreEqual(Expected4, Actual4);
         }
     }
 }

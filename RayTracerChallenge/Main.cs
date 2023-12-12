@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -323,6 +324,58 @@ namespace RayTracerChallenge
                 }
             }
             return true;
+        }
+
+        //returns a matrix with row and column of the original matrix removed
+        public static Matrix GetSubmatrix(Matrix Original, int Row, int Column)
+        {
+            int x = 0;
+            Matrix New;
+            New.Data = new float[Original.Data.GetLength(0)-1, Original.Data.GetLength(1)-1];
+            
+            for (int i = 0; i < Original.Data.GetLength(0); ++i)
+            {
+                int y = 0;
+                if (i == Row)
+                {
+                    continue;
+                }
+                for (int j = 0; j < Original.Data.GetLength(1); ++j)
+                {
+                    if (j == Column)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        New.Data[x, y] = Original.Data[i, j];
+                    }  
+                    ++y;
+                }
+                ++x;
+            }
+            return New;
+        }
+
+        //returns the determinant of 3x3 matrix
+        public static float FindMinor(Matrix Original, int Row, int Column)
+        {
+            Matrix SubMatrix = GetSubmatrix(Original, Row, Column);
+            return TupleArithmatic.FindDeterminant(SubMatrix);
+        }
+
+        //returns the Cofactor of 3x3 matrix
+        public static float FindCofactor(Matrix Original, int Row, int Column)
+        {
+            Matrix SubMatrix = GetSubmatrix(Original, Row, Column);
+            if ((Row + Column) % 2 == 0)
+            {
+                return TupleArithmatic.FindDeterminant(SubMatrix);
+            }
+            else
+            {
+                return -(TupleArithmatic.FindDeterminant(SubMatrix));
+            }
         }
     }
 }
