@@ -271,7 +271,7 @@ namespace RayTracerChallenge.Tests
         }
 
         [TestMethod]
-        public void FindCofactor()
+        public void FindCofactor_Test()
         {
             float[] FullMatrixData = { 3, 5, 0, 2, -1, -7, 6, -1, 5 };
             MainClass.Matrix FullMatrix = new MainClass.Matrix(3, 3, FullMatrixData);
@@ -284,6 +284,27 @@ namespace RayTracerChallenge.Tests
             float Actual2 = MainClass.FindCofactor(FullMatrix, 0, 0);
             float Actual3 = MainClass.FindMinor(FullMatrix, 1, 0);
             float Actual4 = MainClass.FindCofactor(FullMatrix, 1, 0);
+
+            Assert.AreEqual(Expected1, Actual1);
+            Assert.AreEqual(Expected2, Actual2);
+            Assert.AreEqual(Expected3, Actual3);
+            Assert.AreEqual(Expected4, Actual4);
+        }
+
+        [TestMethod]
+        public void FindDeterminant3x3_Test()
+        {
+            float[] FullMatrixData = { 1, 2, 6, -5, 8, -4, 2, 6, 4 };
+            MainClass.Matrix FullMatrix = new MainClass.Matrix(3, 3, FullMatrixData);
+            float Expected1 = 56;
+            float Expected2 = 12;
+            float Expected3 = -46;
+            float Expected4 = -196;
+
+            float Actual1 = MainClass.FindCofactor(FullMatrix, 0, 0);
+            float Actual2 = MainClass.FindCofactor(FullMatrix, 0, 1);
+            float Actual3 = MainClass.FindCofactor(FullMatrix, 0, 2);
+            float Actual4 = MainClass.FindDeterminant(FullMatrix);
 
             Assert.AreEqual(Expected1, Actual1);
             Assert.AreEqual(Expected2, Actual2);

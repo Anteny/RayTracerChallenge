@@ -377,5 +377,38 @@ namespace RayTracerChallenge
                 return -(TupleArithmatic.FindDeterminant(SubMatrix));
             }
         }
+
+        //returns the determinant of any size 2x2, 3x3, 4x4
+        public static float FindDeterminant(Matrix Original)
+        {
+            float determinant = 0;
+
+            if (Original.Data.GetLength(0) == 2)
+            {
+                determinant = TupleArithmatic.FindDeterminant(Original);
+            }
+            else
+            {
+                if (Original.Data.GetLength(0) == 4)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Matrix temp = MainClass.GetSubmatrix(Original, 0, i);
+                        for (int ii = 0; ii < temp.Data.GetLength(1); ++ii)
+                        {
+                            determinant += temp.Data[0, ii] * MainClass.FindCofactor(temp, 0, ii);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < Original.Data.GetLength(1); ++i)
+                    {
+                        determinant += Original.Data[0, i] * MainClass.FindCofactor(Original, 0, i);
+                    }
+                }
+            }
+            return determinant;
+        }
     }
 }
